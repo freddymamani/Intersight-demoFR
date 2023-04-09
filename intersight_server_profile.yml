@@ -37,33 +37,14 @@
     - set_fact:
         mode: FIAttached
       when: mode is not defined or mode == 'Intersight'
-    # Get server moid when not defined in inventory
-    - block:
-        - name: "Get {{ inventory_hostname }} Server Moid"
-          cisco.intersight.intersight_info:
-            <<: *api_info
-            server_names: "{{ inventory_hostname }}"
-          register: server
-        - set_fact:
-            server_moid: "{{ server.intersight_servers[0].Moid }}"
-      when: server_moid is not defined
-      delegate_to: localhost
-    - name: "Configure {{ profile_name }} Server Profile"
-      intersight_server_profile:
-        <<: *api_info
-        organization: "{{ organization | default(omit) }}"
-        name: "{{ profile_name }}"
-        target_platform: "{{ mode | default(omit) }}"
-        tags:
-          - Key: Site
-            Value: SJC02
-        description: "Updated Profile for server name {{ inventory_hostname }}"
-        assigned_server: "{{ server_moid }}"
-        boot_order_policy: "{{ boot_order_policy | default(omit) }}"
-        imc_access_policy: "{{ imc_access_policy | default(omit) }}"
-        lan_connectivity_policy: "{{ lan_connectivity_policy | default(omit) }}"
-        local_user_policy: "{{ local_user_policy | default(omit) }}"
-        ntp_policy: "{{ ntp_policy | default(omit) }}"
-        virtual_media_policy: "{{ virtual_media_policy | default(omit) }}"
-      when: server_moid is defined
-      delegate_to: localhost
+    # Get serv- name: Obtener lista de dispositivos en Cisco Intersight
+    cisco.intersight.intersight_restapi:
+      api_path: /api/v1/compute/PhysicalSummary
+      method: get
+      intersight_api_key: "{{ result.rest_api_result.access_token }}"
+    register: result
+
+  - name: Mostrar lista de dispositivos
+    debug:
+      var: result.rest_api_result.Resultser moid when not defined in inventory
+    
