@@ -29,7 +29,7 @@
       validate_certs: "{{ validate_certs | default(omit) }}"
       state: "{{ state | default(omit) }}"
     # Server Profile name default
-    profile_name: "SP-{{ inventory_hostname }}"
+    profile_name: "{{ inventory_hostname }}"
   tasks:
     #
     # Configure profiles specific to server (run for each server in the inventory)
