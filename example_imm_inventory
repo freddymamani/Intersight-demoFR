@@ -1,6 +1,7 @@
 [Intersight_Servers]
-SJC07-R14-FI-1-1-7
-SJC07-R14-FI-1-1-8
+PRACSO-FABRIC-1-2
+Name
+PRACSO-FABRIC-1
 
 # Examples can use Intersight or Intersight_Servers host group
 [Intersight:children]
