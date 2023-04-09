@@ -1,6 +1,5 @@
 [Intersight_Servers]
 PRACSO-FABRIC-1-2
-Name
 PRACSO-FABRIC-1
 
 # Examples can use Intersight or Intersight_Servers host group
