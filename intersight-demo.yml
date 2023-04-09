@@ -1,0 +1,23 @@
+- name: Obtener inventario de dispositivos en Cisco Intersight
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+  - name: Obtener token de autenticación de Cisco Intersight
+    cisco.intersight.intersight_restapi:
+      api_path: /api/v1/auth/token
+      method: post
+      intersight_api_key_id: "{{ intersight_api_key_id }}"
+      intersight_api_key_secret: "{{ intersight_api_key_secret }}"
+    register: result
+
+  - name: Obtener lista de dispositivos en Cisco Intersight
+    cisco.intersight.intersight_restapi:
+      api_path: /api/v1/compute/PhysicalSummary
+      method: get
+      intersight_api_key: "{{ result.rest_api_result.access_token }}"
+    register: result
+
+  - name: Mostrar lista de dispositivos
+    debug:
+      var: result.rest_api_result.Results
