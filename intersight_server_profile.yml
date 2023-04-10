@@ -30,6 +30,4 @@
       state: "{{ state | default(omit) }}"
     # Server Profile name default
     profile_name: "{{ inventory_hostname }}"
-  tasks:
-  ...
     
