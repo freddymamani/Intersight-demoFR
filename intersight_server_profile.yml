@@ -31,20 +31,5 @@
     # Server Profile name default
     profile_name: "{{ inventory_hostname }}"
   tasks:
-    #
-    # Configure profiles specific to server (run for each server in the inventory)
-    #
-    - set_fact:
-        mode: FIAttached
-      when: mode is not defined or mode == 'Intersight'
-    # Get serv- name: Obtener lista de dispositivos en Cisco Intersight
-    cisco.intersight.intersight_restapi:
-      api_path: /api/v1/compute/PhysicalSummary
-      method: get
-      intersight_api_key: "{{ result.rest_api_result.access_token }}"
-    register: result
-
-  - name: Mostrar lista de dispositivos
-    debug:
-      var: result.rest_api_result.Resultser moid when not defined in inventory
+  ...
     
